@@ -11,58 +11,122 @@
     tools:ignore="RtlSymmetry">
 
     <TextView
+        android:id="@+id/txtWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/welcome_to_wildnest"
-        android:textSize="20sp"
         android:textColor="#FF2CCF99"
-        android:textStyle="bold"/>
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
+        android:id="@+id/txtDesc"
         android:layout_width="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:text="@string/desc"
+        android:textColor="@color/lightGray"
         android:textSize="15sp"
-        android:textColor="@color/lightGray"/>
+        tools:ignore="TextContrastCheck" />
 
     <LinearLayout
-        android:id="@+id/container"
-        android:layout_width="308dp"
-        android:layout_height="100dp"
+        android:id="@+id/btnCamera"
+        android:layout_width="250dp"
+        android:layout_height="120dp"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:background="@color/tealLight"
+        android:layout_marginTop="80dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        android:paddingTop="25dp"
+        android:paddingBottom="15dp"
+        android:background="@drawable/bg_rounded"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:padding="30dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
             <ImageView
                 android:id="@+id/imgCamera"
                 android:layout_width="wrap_content"
                 android:layout_marginEnd="25dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:src="@drawable/camera"
-                />
+                android:importantForAccessibility="no" />
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                tools:ignore="VisualLintBounds">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Camera"/>
+                    android:text="@string/camera"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="15sp"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Camera"/>
+                    android:text="@string/descCamera"
+                    android:textColor="@color/gray"
+                    android:textSize="14sp"
+                    tools:ignore="TextContrastCheck" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/btnGallery"
+        android:layout_width="250dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        android:paddingTop="25dp"
+        android:paddingBottom="15dp"
+        android:background="@drawable/bg_rounded"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
+            <ImageView
+                android:id="@+id/imgGallery"
+                android:layout_width="wrap_content"
+                android:layout_marginEnd="25dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/gallery"
+                android:importantForAccessibility="no" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                tools:ignore="VisualLintBounds">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Camera"/>
+                    android:text="@string/gallery"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/descGallery"
+                    android:textColor="@color/gray"
+                    android:textSize="14sp"
+                    tools:ignore="TextContrastCheck" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

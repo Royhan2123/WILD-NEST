@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.View
 import com.example.wildnest.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity(){
     private lateinit var binding:ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,16 +14,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.container.setOnClickListener(this)
-
+    playAnimation()
     }
-
-    override fun onClick(v: View?) {
-        when(v?.id){
-           R.id.container -> {
-               val intent = Intent(this,CameraActivity::class.java)
-               startActivity(intent)
-           }
-        }
+    private fun playAnimation(){
+binding.
     }
 }
