@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CameraActivity"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="vertical">
 
     <androidx.camera.view.PreviewView
         android:id="@+id/viewFinder"
@@ -32,4 +33,5 @@
         app:layout_constraintEnd_toEndOf="@+id/viewFinder"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/camera_switch_24" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
