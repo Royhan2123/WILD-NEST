@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:paddingTop="100dp"
+    tools:context=".MainActivity"
+    tools:ignore="RtlSymmetry">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome_to_wildnest"
+        android:textSize="20sp"
+        android:textColor="#FF2CCF99"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        android:text="@string/desc"
+        android:textSize="15sp"
+        android:textColor="@color/lightGray"/>
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/green"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/txtIntentLaint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PINDAH"/>
+    </LinearLayout>
+</LinearLayout>

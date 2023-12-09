@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Wild Nest</string>
+    <string name="welcome_to_wildnest">Welcome To Wildnest</string>
+    <string name="img_splashscreen">Img-SplashScreen</string>
+    <string name="desc">In this application,you can now\nExplore natural diversity interactively.\nTake a photo of your surroundings,\nInsert an image, and let the appreveal\nThe mysteries of nature.</string>
+</resources>
