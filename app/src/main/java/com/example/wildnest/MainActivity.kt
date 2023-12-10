@@ -18,14 +18,12 @@ import androidx.core.net.toUri
 import com.example.wildnest.CameraActivity.Companion.CAMERAX_RESULT
 import com.example.wildnest.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityMainBinding
-    private var currentImageUri: Uri? = null
 
     companion object {
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
     }
-
     private val requestPermissionLauncher =
         registerForActivityResult(
             ActivityResultContracts.RequestPermission()
@@ -40,68 +38,55 @@ class MainActivity : AppCompatActivity(){
     private fun allPermissionsGranted() =
         ContextCompat.checkSelfPermission(
             this,
-            REQUIRED_PERMISSION
+            MainActivity.REQUIRED_PERMISSION
         ) == PackageManager.PERMISSION_GRANTED
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         if (!allPermissionsGranted()) {
-            requestPermissionLauncher.launch(REQUIRED_PERMISSION)
+            requestPermissionLauncher.launch(MainActivity.REQUIRED_PERMISSION)
         }
 
-        binding.btnCamera.setOnClickListener { startCameraX() }
-        binding.btnGallery.setOnClickListener { startGallery() }
+        binding.btnOutputCamera.setOnClickListener(this)
+        binding.btnOutputGallery.setOnClickListener(this)
 
         playAnimation()
-    }
-
-    private fun startGallery() {
-        launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-    }
-
-    private val launcherGallery = registerForActivityResult(
-        ActivityResultContracts.PickVisualMedia()
-    ) { uri: Uri? ->
-        if (uri != null) {
-            currentImageUri = uri
-        } else {
-            Log.d("Photo Picker", "No media selected")
-        }
-    }
-    private fun startCameraX() {
-        val intent = Intent(this, CameraActivity::class.java)
-        launcherIntentCameraX.launch(intent)
-    }
-    private val launcherIntentCameraX = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) {
-        if (it.resultCode == CAMERAX_RESULT) {
-            currentImageUri = it.data?.getStringExtra(CameraActivity.EXTRA_CAMERAX_IMAGE)?.toUri()
-        }
     }
 
     private fun playAnimation() {
         binding.txtWelcome.visibility = View.VISIBLE
         binding.txtDesc.visibility = View.VISIBLE
-        binding.btnCamera.visibility = View.VISIBLE
-        binding.btnGallery.visibility = View.VISIBLE
+        binding.btnOutputCamera.visibility = View.VISIBLE
+        binding.btnOutputGallery.visibility = View.VISIBLE
 
         binding.txtWelcome.alpha = 0f
         binding.txtDesc.alpha = 0f
-        binding.btnCamera.alpha = 0f
-        binding.btnGallery.alpha = 0f
+        binding.btnOutputCamera.alpha = 0f
+        binding.btnOutputGallery.alpha = 0f
 
         val animatorSet = AnimatorSet()
         animatorSet.playSequentially(
             ObjectAnimator.ofFloat(binding.txtWelcome, View.ALPHA, 1.5f).setDuration(800),
             ObjectAnimator.ofFloat(binding.txtDesc, View.ALPHA, 1f).setDuration(800),
-            ObjectAnimator.ofFloat(binding.btnCamera, View.ALPHA, 1f).setDuration(800),
-            ObjectAnimator.ofFloat(binding.btnGallery, View.ALPHA, 1f).setDuration(800),
+            ObjectAnimator.ofFloat(binding.btnOutputCamera, View.ALPHA, 1f).setDuration(800),
+            ObjectAnimator.ofFloat(binding.btnOutputGallery, View.ALPHA, 1f).setDuration(800),
         )
         // Start animation
         animatorSet.start()
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id){
+            R.id.btnOutputCamera -> {
+            val intent = Intent(this@MainActivity,OutputCamera::class.java)
+                startActivity(intent)
+            }
+            R.id.btnOutputGallery -> {
+                val intent = Intent(this@MainActivity,OutputGallery::class.java)
+                startActivity(intent)
+            }
+        }
     }
 }

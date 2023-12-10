@@ -31,7 +31,7 @@
         tools:ignore="TextContrastCheck" />
 
     <LinearLayout
-        android:id="@+id/btnCamera"
+        android:id="@+id/btnOutputCamera"
         android:layout_width="300dp"
         android:layout_height="113dp"
         android:layout_gravity="center"
@@ -80,7 +80,7 @@
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/btnGallery"
+        android:id="@+id/btnOutputGallery"
         android:layout_width="300dp"
         android:layout_height="113dp"
         android:layout_gravity="center"
