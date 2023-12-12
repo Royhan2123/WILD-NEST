@@ -33,7 +33,7 @@
     <LinearLayout
         android:id="@+id/btnOutputCamera"
         android:layout_width="300dp"
-        android:layout_height="113dp"
+        android:layout_height="115dp"
         android:layout_gravity="center"
         android:layout_marginTop="80dp"
         android:paddingStart="30dp"
@@ -82,7 +82,7 @@
     <LinearLayout
         android:id="@+id/btnOutputGallery"
         android:layout_width="300dp"
-        android:layout_height="113dp"
+        android:layout_height="115dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:paddingStart="30dp"
