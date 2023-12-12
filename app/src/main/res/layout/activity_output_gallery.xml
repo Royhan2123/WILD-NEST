@@ -15,7 +15,7 @@
         tools:ignore="UselessParent">
 
         <ImageView
-            android:id="@+id/previewImage"
+            android:id="@+id/previewImageGallery"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="@string/image_preview"

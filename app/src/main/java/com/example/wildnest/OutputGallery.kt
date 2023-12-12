@@ -14,7 +14,7 @@ class OutputGallery : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityOutputGalleryBinding.inflate(layoutInflater)
+        binding = ActivityOutputGalleryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.btnGallery.setOnClickListener { startGallery() }
@@ -35,9 +35,6 @@ class OutputGallery : AppCompatActivity() {
         }
     }
     private fun showImage() {
-        currentImageUri?.let {
-            Log.d("Image URI", "showImage: $it")
-            binding.previewImage.setImageURI(it)
-        }
+        binding.previewImageGallery.setImageURI(currentImageUri)
     }
 }
