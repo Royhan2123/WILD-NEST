@@ -21,13 +21,13 @@
         android:theme="@style/Theme.WildNest"
         tools:targetApi="31">
         <activity
-            android:name=".OutputGallery"
+            android:name=".Gallery.OutputGallery"
             android:exported="false" />
         <activity
-            android:name=".OutputCamera"
+            android:name=".Camera.OutputCamera"
             android:exported="false" />
         <activity
-            android:name=".CameraActivity"
+            android:name=".Camera.CameraActivity"
             android:exported="false" />
         <activity
             android:name=".SplashScreen"

@@ -1,4 +1,4 @@
-package com.example.wildnest
+package com.example.wildnest.Utils
 
 import android.content.ContentValues
 import android.content.Context

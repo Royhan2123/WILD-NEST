@@ -1,18 +1,13 @@
-package com.example.wildnest
+package com.example.wildnest.Camera
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
-import com.example.wildnest.CameraActivity.Companion.CAMERAX_RESULT
-import com.example.wildnest.databinding.ActivityMainBinding
+import com.example.wildnest.Camera.CameraActivity.Companion.CAMERAX_RESULT
 import com.example.wildnest.databinding.ActivityOutputCameraBinding
 
 class OutputCamera : AppCompatActivity() {

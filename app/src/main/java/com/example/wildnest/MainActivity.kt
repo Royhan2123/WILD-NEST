@@ -5,17 +5,14 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
-import com.example.wildnest.CameraActivity.Companion.CAMERAX_RESULT
+import com.example.wildnest.Camera.OutputCamera
+import com.example.wildnest.Gallery.OutputGallery
 import com.example.wildnest.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -80,11 +77,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.btnOutputCamera -> {
-            val intent = Intent(this@MainActivity,OutputCamera::class.java)
+            val intent = Intent(this@MainActivity, OutputCamera::class.java)
                 startActivity(intent)
             }
             R.id.btnOutputGallery -> {
-                val intent = Intent(this@MainActivity,OutputGallery::class.java)
+                val intent = Intent(this@MainActivity, OutputGallery::class.java)
                 startActivity(intent)
             }
         }

@@ -1,4 +1,4 @@
-package com.example.wildnest
+package com.example.wildnest.Gallery
 
 import android.content.Intent
 import android.graphics.Bitmap
@@ -19,7 +19,7 @@ class OutputGallery : AppCompatActivity() {
     private lateinit var binding: ActivityOutputGalleryBinding
     // private var currentImageUri: Uri? = null
     private lateinit var bitmap: Bitmap
-
+    private var labels = application.assets.open("data.txt").bufferedReader().readLines()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOutputGalleryBinding.inflate(layoutInflater)
@@ -28,8 +28,6 @@ class OutputGallery : AppCompatActivity() {
         // image processor
         val imageProcessor = ImageProcessor.Builder()
             .add(ResizeOp(224, 224, ResizeOp.ResizeMethod.BILINEAR))
-//            .add(NormalizeOp(0.0f,255.0f))
-//            .add(TransformToGrayscaleOp())
             .build()
 
         binding.btnGallery.setOnClickListener {
@@ -57,7 +55,7 @@ class OutputGallery : AppCompatActivity() {
                 if (outputFeature0[maxIdx] < fl) {
                     maxIdx = index
                 }
-                binding.txtName.text = maxIdx.toString()
+                binding.txtName.text = labels[maxIdx]
             }
             model.close()
         }
