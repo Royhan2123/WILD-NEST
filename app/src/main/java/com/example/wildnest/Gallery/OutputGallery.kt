@@ -1,34 +1,34 @@
 package com.example.wildnest.Gallery
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import com.example.wildnest.databinding.ActivityOutputGalleryBinding
-import com.example.wildnest.ml.Model
+import com.example.wildnest.ml.MobilenetV110224Quant
 import org.tensorflow.lite.DataType
-import org.tensorflow.lite.support.image.ImageProcessor
 import org.tensorflow.lite.support.image.TensorImage
-import org.tensorflow.lite.support.image.ops.ResizeOp
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
-import java.io.IOException
 
 @Suppress("DEPRECATION")
 class OutputGallery : AppCompatActivity() {
     private lateinit var binding: ActivityOutputGalleryBinding
-    // private var currentImageUri: Uri? = null
     private lateinit var bitmap: Bitmap
-    private var labels = application.assets.open("data.txt").bufferedReader().readLines()
+
+    @SuppressLint("IntentReset")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOutputGalleryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // image processor
-        val imageProcessor = ImageProcessor.Builder()
-            .add(ResizeOp(224, 224, ResizeOp.ResizeMethod.BILINEAR))
-            .build()
+        val fileName = "labels.txt"
+        val inputString = application.assets.open(fileName).bufferedReader().use {
+            it.readText()
+        }
+        val townList = inputString.split("\n")
 
         binding.btnGallery.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
@@ -37,26 +37,22 @@ class OutputGallery : AppCompatActivity() {
         }
 
         binding.btnFindOut.setOnClickListener {
-            val tensorImage = TensorImage(DataType.UINT8)
-            tensorImage.load(bitmap)
+            val resized : Bitmap = Bitmap.createScaledBitmap(bitmap,224,224,true)
 
-            imageProcessor.process(tensorImage)
+            val model = MobilenetV110224Quant.newInstance(this)
 
-            val model = Model.newInstance(this)
             val inputFeature0 =
-                TensorBuffer.createFixedSize(intArrayOf(1, 128, 128, 3), DataType.FLOAT32)
-            inputFeature0.loadBuffer(tensorImage.buffer)
+                TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.UINT8)
+
+            val tbuffer = TensorImage.fromBitmap(resized)
+            val byteBuffer = tbuffer.buffer
+            inputFeature0.loadBuffer(byteBuffer)
 
             val outputs = model.process(inputFeature0)
-            val outputFeature0 = outputs.outputFeature0AsTensorBuffer.floatArray
+            val outputFeature0 = outputs.outputFeature0AsTensorBuffer
 
-            var maxIdx = 0
-            outputFeature0.forEachIndexed { index, fl ->
-                if (outputFeature0[maxIdx] < fl) {
-                    maxIdx = index
-                }
-                binding.txtName.text = labels[maxIdx]
-            }
+            val max = getMax(outputFeature0.floatArray)
+            binding.tvOutput.text = townList[max]
             model.close()
         }
     }
@@ -64,37 +60,21 @@ class OutputGallery : AppCompatActivity() {
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        binding.imageView.setImageURI(data?.data)
+        val uri: Uri? = data?.data
+        bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
+    }
 
-        if (resultCode == RESULT_OK && requestCode == 100) {
-            val uri = data?.data
-            uri?.let {
-                try {
-                    // Load the selected image into the bitmap
-                    bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, it)
+    fun getMax(arr: FloatArray): Int {
+        var ind = 0
+        var min = 0.0f
 
-                    // Display the bitmap in previewImageGallery
-                    binding.previewImageGallery.setImageBitmap(bitmap)
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                }
+        for (i in 0..1000) {
+            if (arr[i] > min) {
+                ind = i
+                min = arr[i]
             }
         }
+        return ind
     }
-//    private fun startGallery() {
-//        launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-//    }
-//
-//    private val launcherGallery = registerForActivityResult(
-//        ActivityResultContracts.PickVisualMedia()
-//    ) { uri: Uri? ->
-//        if (uri != null) {
-//            currentImageUri = uri
-//            showImage()
-//        } else {
-//            Log.d("Photo Picker", "No media selected")
-//        }
-//    }
-//    private fun showImage() {
-//        binding.previewImageGallery.setImageURI(currentImageUri)
-//    }
 }
