@@ -60,7 +60,7 @@ class OutputGallery : AppCompatActivity() {
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        binding.imageView.setImageURI(data?.data)
+        binding.previewImage.setImageURI(data?.data)
         val uri: Uri? = data?.data
         bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
     }

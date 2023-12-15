@@ -10,6 +10,7 @@
         motion:autoTransition="animateToEnd">
        <KeyFrameSet>
        </KeyFrameSet>
+        <OnSwipe motion:maxAcceleration="1.0" />
     </Transition>
 
     <ConstraintSet android:id="@+id/start">

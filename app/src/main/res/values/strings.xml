@@ -11,4 +11,6 @@
     <string name="find_out">Find Out</string>
     <string name="open_camera">Open Camera</string>
     <string name="open_gallery">open Gallery</string>
+    <string name="output">Output:</string>
+    <string name="result_here">Result Here</string>
 </resources>
