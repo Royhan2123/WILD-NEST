@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toUri
-import com.example.wildnest.Camera.CameraActivity.Companion.CAMERAX_RESULT
+import com.example.wildnest.Camera.CameraScreen.Companion.CAMERAX_RESULT
 import com.example.wildnest.databinding.ActivityOutputCameraBinding
 import com.example.wildnest.ml.Model
 import org.tensorflow.lite.DataType
@@ -35,7 +35,7 @@ class OutputCamera : AppCompatActivity() {
         binding.btnFindOut.setOnClickListener { findOut() }
     }
     private fun startCameraX() {
-        val intent = Intent(this, CameraActivity::class.java)
+        val intent = Intent(this, CameraScreen::class.java)
         launcherIntentCameraX.launch(intent)
     }
 
@@ -87,7 +87,7 @@ class OutputCamera : AppCompatActivity() {
         ActivityResultContracts.StartActivityForResult()
     ) {
         if (it.resultCode == CAMERAX_RESULT) {
-            currentImageUri = it.data?.getStringExtra(CameraActivity.EXTRA_CAMERAX_IMAGE)?.toUri()
+            currentImageUri = it.data?.getStringExtra(CameraScreen.EXTRA_CAMERAX_IMAGE)?.toUri()
             showImage()
         }
     }
