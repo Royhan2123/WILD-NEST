@@ -21,7 +21,7 @@
         android:theme="@style/Theme.WildNest"
         tools:targetApi="31">
         <activity
-            android:name=".SplashScreen2"
+            android:name=".splash.SplashScreen2"
             android:exported="false" />
         <activity
             android:name=".RegisterScreen"
@@ -36,10 +36,10 @@
             android:name=".Camera.OutputCamera"
             android:exported="false" />
         <activity
-            android:name=".Camera.CameraScreen"
+            android:name=".Camera.CameraXScreen"
             android:exported="false" />
         <activity
-            android:name=".SplashScreen"
+            android:name=".splash.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

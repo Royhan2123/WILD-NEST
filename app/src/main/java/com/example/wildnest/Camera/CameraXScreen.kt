@@ -19,7 +19,7 @@ import androidx.core.content.ContextCompat
 import com.example.wildnest.Utils.createCustomTempFile
 import com.example.wildnest.databinding.ActivityCameraBinding
 
-class CameraScreen : AppCompatActivity() {
+class CameraXScreen : AppCompatActivity() {
     private lateinit var binding: ActivityCameraBinding
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
     private var imageCapture: ImageCapture? = null
@@ -67,7 +67,7 @@ class CameraScreen : AppCompatActivity() {
 
             } catch (exc: Exception) {
                 Toast.makeText(
-                    this@CameraScreen,
+                    this@CameraXScreen,
                     "Gagal memunculkan kamera.",
                     Toast.LENGTH_SHORT
                 ).show()
@@ -95,7 +95,7 @@ class CameraScreen : AppCompatActivity() {
 
                 override fun onError(exc: ImageCaptureException) {
                     Toast.makeText(
-                        this@CameraScreen,
+                        this@CameraXScreen,
                         "Gagal mengambil gambar.",
                         Toast.LENGTH_SHORT
                     ).show()

@@ -1,4 +1,4 @@
-package com.example.wildnest
+package com.example.wildnest.splash
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
@@ -7,8 +7,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.example.wildnest.LoginScreen
+import com.example.wildnest.R
 import com.example.wildnest.databinding.ActivitySplashScreen2Binding
 
+@Suppress("DEPRECATION")
 @SuppressLint("CustomSplashScreen")
 class SplashScreen2 : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivitySplashScreen2Binding
@@ -49,10 +52,14 @@ class SplashScreen2 : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.btnStart -> {
-                val intent = Intent(this,LoginScreen::class.java)
+                val intent = Intent(this, LoginScreen::class.java)
                 startActivity(intent)
+
+                this@SplashScreen2.overridePendingTransition(
+                    R.anim.fade_in,
+                    R.anim.fade_out,
+                )
             }
         }
     }
-
 }
