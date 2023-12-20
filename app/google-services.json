@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "562069256830",
+    "project_id": "wild-nest-be6a7",
+    "storage_bucket": "wild-nest-be6a7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:562069256830:android:8be6e765879b462de9b62f",
+        "android_client_info": {
+          "package_name": "com.example.wildnest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6ajXd2WZlHto4_Iotl0zoR_A650TVEOw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
