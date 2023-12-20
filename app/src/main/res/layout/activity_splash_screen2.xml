@@ -13,5 +13,30 @@
         android:id="@+id/imgView"
         android:layout_width="300dp"
         android:layout_height="150dp"
-        android:src="@drawable/splash_screen2"/>
+        android:src="@drawable/splash2"
+        android:contentDescription="@string/descImageSplashScreen2"/>
+    <TextView
+        android:id="@+id/txtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/welcome_to_wild_nest"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/txtDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textSize="16sp"
+        android:text="@string/txtDescSplash2"
+        android:textAlignment="center"/>
+
+    <com.example.wildnest.Widget.ButtonStyle
+        android:id="@+id/btn_getStarted"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="220dp"
+        tools:ignore="SpeakableTextPresentCheck" />
 </LinearLayout>
