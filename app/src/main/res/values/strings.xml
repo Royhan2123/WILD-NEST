@@ -16,4 +16,5 @@
     <string name="descImageSplashScreen2">this image splash screen 2</string>
     <string name="welcome_to_wild_nest">Welcome To Wild Nest</string>
     <string name="txtDescSplash2">Welcome to Wild Nest, fellow hikers!\nThis app is specially designed to help\nyou detect poisonous plants around you.\nLet\'s explore and understand the diversity\nof flora more safely together.</string>
+    <string name="get_started">Get Started</string>
 </resources>

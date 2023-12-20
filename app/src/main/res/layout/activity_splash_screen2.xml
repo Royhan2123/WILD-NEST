@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
+    android:id="@+id/backgroundLayout"
+    android:background="@drawable/background"
     tools:context=".SplashScreen2">
 
     <ImageView
         android:id="@+id/imgView"
         android:layout_width="300dp"
         android:layout_height="150dp"
+        android:layout_marginTop="200dp"
+        android:contentDescription="@string/descImageSplashScreen2"
         android:src="@drawable/splash2"
-        android:contentDescription="@string/descImageSplashScreen2"/>
+        tools:ignore="ImageContrastCheck" />
     <TextView
         android:id="@+id/txtView"
         android:layout_width="wrap_content"
@@ -33,10 +36,14 @@
         android:text="@string/txtDescSplash2"
         android:textAlignment="center"/>
 
-    <com.example.wildnest.Widget.ButtonStyle
-        android:id="@+id/btn_getStarted"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnStart"
         android:layout_width="320dp"
         android:layout_height="50dp"
-        android:layout_marginTop="220dp"
-        tools:ignore="SpeakableTextPresentCheck" />
+        android:layout_marginTop="150dp"
+        android:text="@string/get_started"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@drawable/button_style"/>
 </LinearLayout>
