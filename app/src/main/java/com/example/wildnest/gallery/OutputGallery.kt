@@ -1,4 +1,4 @@
-package com.example.wildnest.Gallery
+package com.example.wildnest.gallery
 
 import android.annotation.SuppressLint
 import android.content.Intent

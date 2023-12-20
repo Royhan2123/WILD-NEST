@@ -7,22 +7,34 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import com.example.wildnest.LoginScreen
+import com.example.wildnest.login.LoginScreen
 import com.example.wildnest.R
 import com.example.wildnest.databinding.ActivitySplashScreen2Binding
 
+
 @Suppress("DEPRECATION")
 @SuppressLint("CustomSplashScreen")
-class SplashScreen2 : AppCompatActivity(), View.OnClickListener {
+class SplashScreen2 : AppCompatActivity(){
     private lateinit var binding: ActivitySplashScreen2Binding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySplashScreen2Binding.inflate(layoutInflater)
-        setContentView(binding.root)
+            // Jika belum login, tampilkan SplashScreen2
+            binding = ActivitySplashScreen2Binding.inflate(layoutInflater)
+            setContentView(binding.root)
 
-        playAnimation()
-        binding.btnStart.setOnClickListener(this)
-    }
+            playAnimation()
+            binding.btnStart.setOnClickListener{
+                val intent = Intent(this, LoginScreen::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+
+                this@SplashScreen2.overridePendingTransition(
+                    R.anim.fade_in,
+                    R.anim.fade_out,
+                )
+            }
+}
+
 
     private fun playAnimation() {
         binding.backgroundLayout.visibility = View.VISIBLE
@@ -47,19 +59,5 @@ class SplashScreen2 : AppCompatActivity(), View.OnClickListener {
         )
         // Start animation
         animatorSet.start()
-    }
-
-    override fun onClick(v: View?) {
-        when(v?.id){
-            R.id.btnStart -> {
-                val intent = Intent(this, LoginScreen::class.java)
-                startActivity(intent)
-
-                this@SplashScreen2.overridePendingTransition(
-                    R.anim.fade_in,
-                    R.anim.fade_out,
-                )
-            }
-        }
     }
 }

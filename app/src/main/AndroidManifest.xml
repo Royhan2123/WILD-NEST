@@ -24,19 +24,19 @@
             android:name=".splash.SplashScreen2"
             android:exported="false" />
         <activity
-            android:name=".RegisterScreen"
+            android:name=".register.RegisterScreen"
             android:exported="false" />
         <activity
-            android:name=".LoginScreen"
+            android:name=".login.LoginScreen"
             android:exported="false" />
         <activity
-            android:name=".Gallery.OutputGallery"
+            android:name=".gallery.OutputGallery"
             android:exported="false" />
         <activity
-            android:name=".Camera.OutputCamera"
+            android:name=".camera.OutputCamera"
             android:exported="false" />
         <activity
-            android:name=".Camera.CameraXScreen"
+            android:name=".camera.CameraXScreen"
             android:exported="false" />
         <activity
             android:name=".splash.SplashScreen"

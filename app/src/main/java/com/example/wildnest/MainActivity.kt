@@ -3,6 +3,7 @@ package com.example.wildnest
 import android.Manifest
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
@@ -11,8 +12,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import com.example.wildnest.Camera.OutputCamera
-import com.example.wildnest.Gallery.OutputGallery
+import com.example.wildnest.camera.OutputCamera
+import com.example.wildnest.gallery.OutputGallery
 import com.example.wildnest.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -34,21 +35,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun allPermissionsGranted() =
         ContextCompat.checkSelfPermission(
-            this,
-            MainActivity.REQUIRED_PERMISSION
+            this,REQUIRED_PERMISSION
         ) == PackageManager.PERMISSION_GRANTED
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val username = intent.getStringExtra("USERNAME")
+
         if (!allPermissionsGranted()) {
-            requestPermissionLauncher.launch(MainActivity.REQUIRED_PERMISSION)
+            requestPermissionLauncher.launch(REQUIRED_PERMISSION)
         }
 
         binding.btnOutputCamera.setOnClickListener(this)
         binding.btnOutputGallery.setOnClickListener(this)
-
+        binding.txtWelcome.text = "Hello $username"
         playAnimation()
     }
 

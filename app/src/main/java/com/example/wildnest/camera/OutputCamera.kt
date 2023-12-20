@@ -1,4 +1,4 @@
-package com.example.wildnest.Camera
+package com.example.wildnest.camera
 
 import android.content.Intent
 import android.graphics.Bitmap
@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toUri
-import com.example.wildnest.Camera.CameraXScreen.Companion.CAMERAX_RESULT
+import com.example.wildnest.camera.CameraXScreen.Companion.CAMERAX_RESULT
 import com.example.wildnest.databinding.ActivityOutputCameraBinding
 import com.example.wildnest.ml.Model
 import org.tensorflow.lite.DataType

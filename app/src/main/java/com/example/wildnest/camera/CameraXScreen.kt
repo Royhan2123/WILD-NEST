@@ -1,4 +1,4 @@
-package com.example.wildnest.Camera
+package com.example.wildnest.camera
 
 import android.content.Intent
 import android.os.Build

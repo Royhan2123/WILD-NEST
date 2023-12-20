@@ -1,13 +1,14 @@
-package com.example.wildnest
+package com.example.wildnest.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
+import com.example.wildnest.MainActivity
+import com.example.wildnest.R
+import com.example.wildnest.register.RegisterScreen
 import com.example.wildnest.databinding.ActivityLoginScreenBinding
 import com.example.wildnest.model.UsersModel
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -27,7 +28,7 @@ class LoginScreen : AppCompatActivity() {
         firebaseDatabase = FirebaseDatabase.getInstance()
         databaseReference = firebaseDatabase.reference.child("users")
         binding.txtSignUp.setOnClickListener {
-
+            startActivity(Intent(this@LoginScreen, RegisterScreen::class.java))
         }
 
         binding.btnLogin.setOnClickListener{
@@ -50,8 +51,9 @@ class LoginScreen : AppCompatActivity() {
                         val userData = userSnapshot.getValue(UsersModel::class.java)
 
                         if (userData != null && userData.password == password ){
-                            Toast.makeText(this@LoginScreen,"Login Succesful",Toast.LENGTH_SHORT).show()
-                            startActivity(Intent(this@LoginScreen,MainActivity::class.java))
+                            val intent = Intent(this@LoginScreen, MainActivity::class.java)
+                            intent.putExtra("USERNAME", userData.username)
+                            startActivity(intent)
                             finish()
                             return
                         }
