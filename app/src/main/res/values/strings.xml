@@ -17,4 +17,17 @@
     <string name="welcome_to_wild_nest">Welcome To Wild Nest</string>
     <string name="txtDescSplash2">Welcome to Wild Nest, fellow hikers!\nThis app is specially designed to help\nyou detect poisonous plants around you.\nLet\'s explore and understand the diversity\nof flora more safely together.</string>
     <string name="get_started">Get Started</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login_to_your_account">Login To Your Account</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="login">Login</string>
+    <string name="or">-- or --</string>
+    <string name="login_with_google">Login With Google</string>
+    <string name="don_t_have_account">Don\'t have account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="create_to_your_account">Create To Your Account</string>
+    <string name="name">Name</string>
+    <string name="already_have_accoun_t">Already have accoun\'t?</string>
+    <string name="sign_in">Sign In</string>
 </resources>
