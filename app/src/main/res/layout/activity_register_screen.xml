@@ -76,18 +76,18 @@
         tools:ignore="VisualLintTextFieldSize" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnCreateAccount"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_gravity="center"
         android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
-
         android:layout_marginEnd="25dp"
         android:background="@drawable/button_style_2"
-        android:text="@string/login"
+        android:text="@string/create_account"
         android:textColor="@color/white"
         android:textSize="15sp"
+        android:textAllCaps="false"
         android:textStyle="bold"
         tools:ignore="TextContrastCheck,VisualLintButtonSize,TouchTargetSizeCheck" />
 
