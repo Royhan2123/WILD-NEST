@@ -6,7 +6,7 @@
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
     <string name="descGallery">Capture an image from your gallery and discover the results of the captured picture.</string>
-    <string name="descCamera">Capture a vivid image of something fascinating and witness the mesmerizing results</string>
+    <string name="descCamera">take a picture through the camera, and see the result of the picture</string>
     <string name="image_preview">image preview</string>
     <string name="find_out">Find Out</string>
     <string name="open_camera">Open Camera</string>
