@@ -8,9 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import com.example.wildnest.databinding.ActivityOutputGalleryBinding
-import com.example.wildnest.ml.MobilenetV110224Quant
+import com.example.wildnest.ml.Model
 import org.tensorflow.lite.DataType
-import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 
 @Suppress("DEPRECATION")
@@ -24,11 +23,11 @@ class OutputGallery : AppCompatActivity() {
         binding = ActivityOutputGalleryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val fileName = "labels.txt"
-        val inputString = application.assets.open(fileName).bufferedReader().use {
+        val fileInfo = "info.txt"
+        val inputStringInfo = application.assets.open(fileInfo).bufferedReader().use {
             it.readText()
         }
-        val townList = inputString.split("\n")
+        val info = inputStringInfo.split("===")
 
         binding.btnGallery.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
@@ -37,22 +36,33 @@ class OutputGallery : AppCompatActivity() {
         }
 
         binding.btnFindOut.setOnClickListener {
-            val resized : Bitmap = Bitmap.createScaledBitmap(bitmap,224,224,true)
+            val resized: Bitmap = Bitmap.createScaledBitmap(bitmap, 128, 128, true)
 
-            val model = MobilenetV110224Quant.newInstance(this)
+            val model = Model.newInstance(this)
 
-            val inputFeature0 =
-                TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.UINT8)
+            val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 128, 128, 3), DataType.FLOAT32)
 
-            val tbuffer = TensorImage.fromBitmap(resized)
-            val byteBuffer = tbuffer.buffer
-            inputFeature0.loadBuffer(byteBuffer)
+            val pixelValues = FloatArray(128 * 128 * 3)
+            var pixel = 0
+
+            for (x in 0 until 128) {
+                for (y in 0 until 128) {
+                    val px = resized.getPixel(x, y)
+
+                    pixelValues[pixel++] = ((px shr 16 and 0xFF) / 255.0).toFloat()
+                    pixelValues[pixel++] = ((px shr 8 and 0xFF) / 255.0).toFloat()
+                    pixelValues[pixel++] = ((px and 0xFF) / 255.0).toFloat()
+                }
+            }
+
+            inputFeature0.loadArray(pixelValues, intArrayOf(1, 128, 128, 3))
 
             val outputs = model.process(inputFeature0)
             val outputFeature0 = outputs.outputFeature0AsTensorBuffer
 
             val max = getMax(outputFeature0.floatArray)
-            binding.tvOutput.text = townList[max]
+            binding.tvOutput.text = info[max]
+
             model.close()
         }
     }
@@ -69,7 +79,7 @@ class OutputGallery : AppCompatActivity() {
         var ind = 0
         var min = 0.0f
 
-        for (i in 0..1000) {
+        for (i in 0..5) {
             if (arr[i] > min) {
                 ind = i
                 min = arr[i]
