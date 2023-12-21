@@ -25,6 +25,10 @@ class RegisterScreen : AppCompatActivity() {
 
         binding.txtSignIn.setOnClickListener {
             startActivity(Intent(this@RegisterScreen, LoginScreen::class.java))
+            this@RegisterScreen.overridePendingTransition(
+                R.anim.fade_in,
+                R.anim.fade_out,
+            )
             finish()
         }
 

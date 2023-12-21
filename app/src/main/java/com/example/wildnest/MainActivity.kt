@@ -61,6 +61,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding.txtWelcome.text = "Hello, $username"
         binding.btnAccount.setOnClickListener {
             startActivity(Intent(this@MainActivity, AccountScreen::class.java))
+            this@MainActivity.overridePendingTransition(
+                R.anim.fade_in,
+                R.anim.fade_out,
+            )
         }
         playAnimation()
     }
@@ -101,11 +105,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btnOutputCamera -> {
                 val intent = Intent(this@MainActivity, OutputCamera::class.java)
                 startActivity(intent)
+                this@MainActivity.overridePendingTransition(
+                    R.anim.fade_in,
+                    R.anim.fade_out,
+                )
             }
 
             R.id.btnOutputGallery -> {
                 val intent = Intent(this@MainActivity, OutputGallery::class.java)
                 startActivity(intent)
+                this@MainActivity.overridePendingTransition(
+                    R.anim.fade_in,
+                    R.anim.fade_out,
+                )
             }
         }
     }
