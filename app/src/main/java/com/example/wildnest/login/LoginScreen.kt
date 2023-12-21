@@ -9,12 +9,8 @@ import com.example.wildnest.MainActivity
 import com.example.wildnest.R
 import com.example.wildnest.register.RegisterScreen
 import com.example.wildnest.databinding.ActivityLoginScreenBinding
-import com.example.wildnest.model.UsersModel
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 
 @Suppress("DEPRECATION")
 class LoginScreen : AppCompatActivity() {
