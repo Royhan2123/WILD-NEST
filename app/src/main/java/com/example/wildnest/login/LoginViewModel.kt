@@ -13,7 +13,6 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     val loginSuccess: LiveData<Boolean> = _loginSuccess
 
     private val _registeredUsername = MutableLiveData<String>()
-    val registeredUsername: LiveData<String> = _registeredUsername
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
