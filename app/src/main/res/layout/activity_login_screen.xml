@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical"
     tools:context=".login.LoginScreen">
@@ -42,22 +43,29 @@
         android:textSize="16sp"
         tools:ignore="VisualLintTextFieldSize" />
 
-    <androidx.appcompat.widget.AppCompatEditText
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:id="@+id/txtInputLayout"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:textColor="@android:color/black"
+        app:hintEnabled="false"
+        app:helperTextTextColor="@color/red">
+
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/edtPassword"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
-
-        android:layout_marginEnd="25dp"
         android:background="@drawable/edt_style"
-        android:hint="@string/password"
-        android:inputType="textEmailAddress"
-        android:padding="12dp"
-        android:textColor="@android:color/black"
+        android:inputType="textPassword"
         android:textColorHint="@color/gray"
         android:textSize="16sp"
+        android:hint="@string/password"
         tools:ignore="VisualLintTextFieldSize" />
+
+</com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/txtForgotPassword"

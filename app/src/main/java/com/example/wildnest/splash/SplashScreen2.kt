@@ -18,7 +18,7 @@ class SplashScreen2 : AppCompatActivity(){
     private lateinit var binding: ActivitySplashScreen2Binding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-            // Jika belum login, tampilkan SplashScreen2
+
             binding = ActivitySplashScreen2Binding.inflate(layoutInflater)
             setContentView(binding.root)
 
@@ -57,6 +57,7 @@ class SplashScreen2 : AppCompatActivity(){
             ObjectAnimator.ofFloat(binding.txtDesc, View.ALPHA, 1f).setDuration(800),
             ObjectAnimator.ofFloat(binding.btnStart, View.ALPHA, 1f).setDuration(800),
         )
+
         // Start animation
         animatorSet.start()
     }

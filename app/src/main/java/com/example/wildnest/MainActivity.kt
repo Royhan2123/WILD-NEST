@@ -57,6 +57,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         val username = viewModel.getDisplayName()
         binding.txtWelcome.text = "Hello, $username"
+
+        playAnimation()
     }
 
 
