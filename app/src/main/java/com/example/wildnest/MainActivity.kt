@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
     }
+
     private val requestPermissionLauncher =
         registerForActivityResult(
             ActivityResultContracts.RequestPermission()

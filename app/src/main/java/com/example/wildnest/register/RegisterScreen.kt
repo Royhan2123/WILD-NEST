@@ -3,6 +3,7 @@ package com.example.wildnest.register
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.wildnest.R
@@ -38,6 +39,8 @@ class RegisterScreen : AppCompatActivity() {
             val signUpPassword = binding.edtPassword.text.toString()
 
             if (signUpUsername.isNotEmpty() && signUpEmail.isNotEmpty() && signUpPassword.isNotEmpty()) {
+                // Show the ProgressBar when the registration process starts
+                binding.progressBar.visibility = View.VISIBLE
                 viewModel.signUpUser(signUpEmail, signUpUsername, signUpPassword)
             } else {
                 Toast.makeText(this@RegisterScreen, "All Fields are mandatory", Toast.LENGTH_SHORT).show()
@@ -45,6 +48,9 @@ class RegisterScreen : AppCompatActivity() {
         }
 
         viewModel.registrationSuccess.observe(this) { isRegistrationSuccessful ->
+            // Hide the ProgressBar when the registration process is complete
+            binding.progressBar.visibility = View.INVISIBLE
+
             if (isRegistrationSuccessful) {
                 Toast.makeText(this@RegisterScreen, "SignUp Successful", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this@RegisterScreen, LoginScreen::class.java)

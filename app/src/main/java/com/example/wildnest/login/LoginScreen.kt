@@ -1,11 +1,12 @@
 package com.example.wildnest.login
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
+import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.wildnest.MainActivity
 import com.example.wildnest.R
@@ -13,10 +14,10 @@ import com.example.wildnest.register.RegisterScreen
 import com.example.wildnest.databinding.ActivityLoginScreenBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import java.util.regex.Pattern
 
 @Suppress("DEPRECATION")
 class LoginScreen : AppCompatActivity() {
+
     private lateinit var binding: ActivityLoginScreenBinding
     private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference
@@ -40,6 +41,8 @@ class LoginScreen : AppCompatActivity() {
             val loginPassword = binding.edtPassword.text.toString()
 
             if (loginEmail.isNotEmpty() && loginPassword.isNotEmpty()) {
+                // Show the ProgressBar when login starts
+                binding.progressBar.visibility = View.VISIBLE
                 viewModel.loginUser(loginEmail, loginPassword)
             } else {
                 Toast.makeText(this@LoginScreen, "All Fields are mandatory", Toast.LENGTH_SHORT)
@@ -48,6 +51,7 @@ class LoginScreen : AppCompatActivity() {
         }
 
         viewModel.loginSuccess.observe(this) { isLoginSuccessful ->
+            // Hide the ProgressBar after login completes
             if (isLoginSuccessful) {
                 val intent = Intent(this@LoginScreen, MainActivity::class.java)
                 startActivity(intent)
@@ -60,8 +64,12 @@ class LoginScreen : AppCompatActivity() {
             } else {
                 Toast.makeText(this@LoginScreen, "Login Failed", Toast.LENGTH_SHORT).show()
             }
+
+            // Move this line here to ensure the ProgressBar is hidden after the login process
+            binding.progressBar.visibility = View.INVISIBLE
         }
     }
+
 
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {

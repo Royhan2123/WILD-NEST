@@ -13,7 +13,7 @@
         android:layout_width="300dp"
         android:layout_height="120dp"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:importantForAccessibility="no"
         android:src="@drawable/splash2"
         tools:ignore="ImageContrastCheck" />
@@ -46,7 +46,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:id="@+id/txtInputLayout"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
@@ -61,6 +61,7 @@
         android:background="@drawable/edt_style"
         android:inputType="textPassword"
         android:textColorHint="@color/gray"
+        android:textColor="@color/black"
         android:textSize="16sp"
         android:hint="@string/password"
         tools:ignore="VisualLintTextFieldSize" />
@@ -87,12 +88,22 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="25dp"
+        android:textColorHint="@color/gray"
+
         android:background="@drawable/button_style_2"
         android:text="@string/login"
         android:textColor="@color/white"
         android:textSize="15sp"
         android:textStyle="bold"
         tools:ignore="TextContrastCheck,VisualLintButtonSize,TouchTargetSizeCheck" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:progressTint="@color/blue"
+        android:visibility="invisible" />
 
     <LinearLayout
         android:layout_width="match_parent"
