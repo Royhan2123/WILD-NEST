@@ -1,7 +1,7 @@
 # WILD NEST
 
 <p align="center">
-  <img src="![mockupOverview](https://github.com/Royhan2123/WILD-NEST/assets/121564375/c91c0790-765a-4b83-9c12-0eff80d372c7)" alt="Deskripsi Gambar" style="width:100%;">
+  <img src="https://github.com/Royhan2123/WILD-NEST/upload/main" alt="Deskripsi Gambar" style="width:100%;">
 </p>
 
 The Wild Nest app aims to increase understanding of the positive and negative impacts of poisonous plants. We facilitate the identification of poisonous plants through image scanning, provide full descriptions, and information on their utilization for medicinal purposes. Our goal is to preserve the knowledge of future generations about the civilization of certain poisonous plants. By providing educational resources, we seek to promote the wise use of poisonous plants, ensure safe use, and preserve knowledge for the future.
