@@ -36,6 +36,18 @@ class RegisterScreen : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[RegisterViewModel::class.java]
 
+        binding.btnCreateAccount.setOnClickListener {
+            val signUpUsername = binding.edtName.text.toString()
+            val signUpEmail = binding.edtEmail.text.toString()
+            val signUpPassword = binding.edtPassword.text.toString()
+
+            if (signUpUsername.isNotEmpty() && signUpEmail.isNotEmpty() && signUpPassword.isNotEmpty()) {
+                viewModel.signUpUser(signUpEmail, signUpUsername, signUpPassword)
+            } else {
+                Toast.makeText(this@RegisterScreen, "All Fields are mandatory", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         viewModel.registrationSuccess.observe(this) { isRegistrationSuccessful ->
             if (isRegistrationSuccessful) {
                 Toast.makeText(this@RegisterScreen, "SignUp Successful", Toast.LENGTH_SHORT).show()
@@ -43,63 +55,16 @@ class RegisterScreen : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             } else {
-                Toast.makeText(this@RegisterScreen, "User already exists", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        }
-
-        binding.btnCreateAccount.setOnClickListener {
-            val signUpUsername = binding.edtName.text.toString()
-            val signUpEmail = binding.edtEmail.text.toString()
-            val signUppPassword = binding.edtPassword.text.toString()
-
-            if (signUpUsername.isNotEmpty() && signUpEmail.isNotEmpty() && signUppPassword.isNotEmpty()) {
-                viewModel.signUpUser(signUpEmail, signUpUsername, signUppPassword, databaseReference)
-            } else {
-                Toast.makeText(this@RegisterScreen, "All Fields are mandatory", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@RegisterScreen, "User already exists", Toast.LENGTH_SHORT).show()
             }
         }
     }
-//    private fun signUpUser(email: String, username: String, password: String) {
-//        databaseReference.orderByChild("username").equalTo(username)
-//            .addListenerForSingleValueEvent(object : ValueEventListener {
-//                override fun onDataChange(snapshot: DataSnapshot) {
-//                    if (!snapshot.exists()) {
-//                        val id = databaseReference.push().key
-//                        val userData = UsersModel(id, email, username, password)
-//                        databaseReference.child(id!!).setValue(userData)
-//                        Toast.makeText(
-//                            this@RegisterScreen,
-//                            "SignUp Successful",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                        startActivity(Intent(this@RegisterScreen, LoginScreen::class.java))
-//                        finish()
-//                    } else {
-//                        Toast.makeText(
-//                            this@RegisterScreen,
-//                            "User already exists",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                    }
-//                }
-//
-//                override fun onCancelled(error: DatabaseError) {
-//                    Toast.makeText(
-//                        this@RegisterScreen,
-//                        "Database Error: $error",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                }
-//            })
-//    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-        super.onBackPressed()
-        this@RegisterScreen.overridePendingTransition(
-            R.anim.fade_in,
-            R.anim.fade_out,
-        )
-    }
+@Deprecated("Deprecated in Java")
+override fun onBackPressed() {
+    super.onBackPressed()
+    this@RegisterScreen.overridePendingTransition(
+        R.anim.fade_in,
+        R.anim.fade_out,
+    )
+}
 }

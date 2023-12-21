@@ -12,11 +12,14 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import com.example.wildnest.camera.OutputCamera
 import com.example.wildnest.gallery.OutputGallery
 import com.example.wildnest.databinding.ActivityMainBinding
+import com.example.wildnest.login.LoginViewModel
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
+
     private lateinit var binding: ActivityMainBinding
 
     companion object {
@@ -44,8 +47,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
         if (!allPermissionsGranted()) {
             requestPermissionLauncher.launch(REQUIRED_PERMISSION)
         }
@@ -53,9 +54,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding.btnOutputCamera.setOnClickListener(this)
         binding.btnOutputGallery.setOnClickListener(this)
 
-
-        playAnimation()
+        val viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+        val username = viewModel.getDisplayName()
+        binding.txtWelcome.text = "Hello, $username"
     }
+
 
     private fun playAnimation() {
         binding.txtWelcome.visibility = View.VISIBLE

@@ -1,40 +1,44 @@
 package com.example.wildnest.login
 
+import android.app.Application
+import android.content.Context
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.wildnest.model.UsersModel
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
-class LoginViewModel : ViewModel() {
-
+class LoginViewModel(application: Application) : AndroidViewModel(application) {
     private val _loginSuccess = MutableLiveData<Boolean>()
     val loginSuccess: LiveData<Boolean> = _loginSuccess
 
-    fun loginUser(email: String, password: String, databaseReference: DatabaseReference) {
-        databaseReference.orderByChild("email").equalTo(email)
-            .addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()) {
-                        for (userSnapshot in snapshot.children) {
-                            val userData = userSnapshot.getValue(UsersModel::class.java)
+    private val _registeredUsername = MutableLiveData<String>()
+    val registeredUsername: LiveData<String> = _registeredUsername
 
-                            if (userData != null && userData.password == password) {
-                                _loginSuccess.value = true
-                                return
-                            }
-                        }
-                    }
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+
+    fun loginUser(email: String, password: String) {
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val username = auth.currentUser?.displayName ?: ""
+                    saveUsernameToSharedPreferences(username)
+                    _loginSuccess.value = true
+                    _registeredUsername.value = username
+                } else {
                     _loginSuccess.value = false
                 }
+            }
+    }
 
-                override fun onCancelled(error: DatabaseError) {
-                    _loginSuccess.value = false
-                }
-            })
+    fun getDisplayName(): String {
+        return auth.currentUser?.displayName ?: ""
+    }
+
+    private fun saveUsernameToSharedPreferences(username: String) {
+        val sharedPreferences = getApplication<Application>().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("username", username)
+        editor.apply()
     }
 }

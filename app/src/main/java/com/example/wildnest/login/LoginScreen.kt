@@ -35,54 +35,32 @@ class LoginScreen : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
+        binding.btnLogin.setOnClickListener {
+            val loginEmail = binding.edtEmail.text.toString()
+            val loginPassword = binding.edtPassword.text.toString()
+
+            if (loginEmail.isNotEmpty() && loginPassword.isNotEmpty()) {
+                viewModel.loginUser(loginEmail, loginPassword)
+            } else {
+                Toast.makeText(this@LoginScreen, "All Fields are mandatory", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         viewModel.loginSuccess.observe(this) { isLoginSuccessful ->
             if (isLoginSuccessful) {
                 val intent = Intent(this@LoginScreen, MainActivity::class.java)
                 startActivity(intent)
+
+                this@LoginScreen.overridePendingTransition(
+                    R.anim.fade_in,
+                    R.anim.fade_out,
+                )
                 finish()
             } else {
                 Toast.makeText(this@LoginScreen, "Login Failed", Toast.LENGTH_SHORT).show()
             }
         }
-
-        binding.btnLogin.setOnClickListener {
-            val signUpEmail = binding.edtEmail.text.toString()
-            val signUppPassword = binding.edtPassword.text.toString()
-
-            if (signUpEmail.isNotEmpty() && signUppPassword.isNotEmpty()) {
-                viewModel.loginUser(signUpEmail, signUppPassword, databaseReference)
-            } else {
-                Toast.makeText(this@LoginScreen, "All Fields are mandatory", Toast.LENGTH_SHORT).show()
-            }
-        }
     }
-
-//    private fun loginUser(email: String, password: String) {
-//        databaseReference.orderByChild("email").equalTo(email)
-//            .addListenerForSingleValueEvent(object : ValueEventListener {
-//                override fun onDataChange(snapshot: DataSnapshot) {
-//                    if (snapshot.exists()) {
-//                        for (userSnapshot in snapshot.children) {
-//                            val userData = userSnapshot.getValue(UsersModel::class.java)
-//
-//                            if (userData != null && userData.password == password) {
-//                                val intent = Intent(this@LoginScreen, MainActivity::class.java)
-//                                intent.putExtra("USERNAME", userData.username) // Mengirim username ke MainActivity
-//                                startActivity(intent)
-//                                finish()
-//                                return
-//                            }
-//                        }
-//                    }
-//                    Toast.makeText(this@LoginScreen, "Login Failed", Toast.LENGTH_SHORT).show()
-//                }
-//
-//                override fun onCancelled(error: DatabaseError) {
-//                    Toast.makeText(this@LoginScreen, "Database Error: $error", Toast.LENGTH_SHORT)
-//                        .show()
-//                }
-//            })
-//    }
 
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {

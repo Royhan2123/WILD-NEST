@@ -16,30 +16,17 @@ class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
-        firebaseAuth = FirebaseAuth.getInstance()
-        if (isUserLoggedIn()) {
-            Handler().postDelayed({
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                this@SplashScreen.overridePendingTransition(
-                    R.anim.fade_in,
-                    R.anim.fade_out,
-                )
-                finish()
-            }, 3000)
-        } else {
-            Handler().postDelayed({
-                val intent = Intent(this, SplashScreen2::class.java)
-                startActivity(intent)
-                this@SplashScreen.overridePendingTransition(
-                    R.anim.fade_in,
-                    R.anim.fade_out,
-                )
-                finish()
-            }, 3000)
-        }
+
+        Handler().postDelayed({
+            val intent = Intent(this, SplashScreen2::class.java)
+            startActivity(intent)
+            this@SplashScreen.overridePendingTransition(
+                R.anim.fade_in,
+                R.anim.fade_out,
+            )
+            finish()
+        }, 3000)
+
     }
-    private fun isUserLoggedIn():Boolean{
-        return firebaseAuth.currentUser != null
-    }
+
 }
