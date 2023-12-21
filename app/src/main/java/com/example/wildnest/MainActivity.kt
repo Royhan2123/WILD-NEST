@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val username = intent.getStringExtra("USERNAME")
+
 
         if (!allPermissionsGranted()) {
             requestPermissionLauncher.launch(REQUIRED_PERMISSION)
@@ -52,7 +52,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         binding.btnOutputCamera.setOnClickListener(this)
         binding.btnOutputGallery.setOnClickListener(this)
-        binding.txtWelcome.text = "Hello $username"
+
+
         playAnimation()
     }
 
