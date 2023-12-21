@@ -31,4 +31,5 @@
     <string name="already_have_accoun_t">Already have accoun\'t?</string>
     <string name="sign_in">Sign In</string>
     <string name="create_account">Create Account</string>
+    <string name="log_out">Log Out</string>
 </resources>

@@ -18,6 +18,7 @@ import com.example.wildnest.gallery.OutputGallery
 import com.example.wildnest.databinding.ActivityMainBinding
 import com.example.wildnest.login.LoginViewModel
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityMainBinding
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun allPermissionsGranted() =
         ContextCompat.checkSelfPermission(
-            this,REQUIRED_PERMISSION
+            this, REQUIRED_PERMISSION
         ) == PackageManager.PERMISSION_GRANTED
 
     @SuppressLint("SetTextI18n")
@@ -58,10 +59,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         val username = viewModel.getDisplayName()
         binding.txtWelcome.text = "Hello, $username"
-
+        binding.btnAccount.setOnClickListener {
+            startActivity(Intent(this@MainActivity, AccountScreen::class.java))
+        }
         playAnimation()
     }
 
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        super.onBackPressed()
+        this@MainActivity.overridePendingTransition(
+            R.anim.fade_in,
+            R.anim.fade_out,
+        )
+    }
 
     private fun playAnimation() {
         binding.txtWelcome.visibility = View.VISIBLE
@@ -86,11 +97,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
+        when (v?.id) {
             R.id.btnOutputCamera -> {
-            val intent = Intent(this@MainActivity, OutputCamera::class.java)
+                val intent = Intent(this@MainActivity, OutputCamera::class.java)
                 startActivity(intent)
             }
+
             R.id.btnOutputGallery -> {
                 val intent = Intent(this@MainActivity, OutputGallery::class.java)
                 startActivity(intent)

@@ -1,12 +1,10 @@
 package com.example.wildnest.login
 
 import android.content.Intent
-import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.wildnest.MainActivity
 import com.example.wildnest.R
@@ -44,6 +42,7 @@ class LoginScreen : AppCompatActivity() {
                 // Show the ProgressBar when login starts
                 binding.progressBar.visibility = View.VISIBLE
                 viewModel.loginUser(loginEmail, loginPassword)
+
             } else {
                 Toast.makeText(this@LoginScreen, "All Fields are mandatory", Toast.LENGTH_SHORT)
                     .show()
