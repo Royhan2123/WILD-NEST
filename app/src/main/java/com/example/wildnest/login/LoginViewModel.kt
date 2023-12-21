@@ -12,6 +12,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     val loginSuccess: LiveData<Boolean> = _loginSuccess
 
     private val _registeredUsername = MutableLiveData<String>()
+    private val _registeredEmail = MutableLiveData<String>()
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
@@ -19,10 +20,14 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    val username = auth.currentUser?.displayName ?: ""
+                    val user = auth.currentUser
+                    val username = user?.displayName ?: ""
+                    val userEmail = user?.email ?: ""
+
                     saveUsernameToSharedPreferences(username)
                     _loginSuccess.value = true
                     _registeredUsername.value = username
+                    _registeredEmail.value = userEmail
                 } else {
                     _loginSuccess.value = false
                 }
@@ -31,6 +36,10 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getDisplayName(): String {
         return auth.currentUser?.displayName ?: ""
+    }
+
+    fun getEmail(): String {
+        return auth.currentUser?.email ?: ""
     }
 
     private fun saveUsernameToSharedPreferences(username: String) {
